@@ -1,0 +1,65 @@
+<head><link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+  <header class="site-header">
+  <img src="/logo_smartserve.jpg" alt="SmartServe Logo" class="logo" style="width:300px; height:auto;">
+  <h1>SmartServe</h1>
+</header>
+<h2>Your Cart</h2>
+<a href="/customer/<%= customerId %>">← Back to Menu</a>
+<% if (Object.keys(cart).length === 0) { %>
+  <p>Your cart is empty.</p>
+<% } else { %>
+<ul class="cart-list">
+  <% Object.entries(cart).forEach(([id, item]) => { %>
+    <li class="cart-item">
+      <div class="item-info">
+        <span class="item-name"><%= item.name %></span>
+        <span class="item-price">₹<%= item.price * item.qty %></span>
+      </div>
+
+      <div class="quantity-controls">
+        <!-- Decrease quantity -->
+        <form method="POST" action="/customer/<%= customerId %>/cart/decrease" style="display:inline;">
+          <input type="hidden" name="itemId" value="<%= id %>">
+          <button type="submit" class="qty-btn">−</button>
+        </form>
+
+        <span class="qty"><%= item.qty %></span>
+
+        <!-- Increase quantity -->
+        <form method="POST" action="/customer/<%= customerId %>/cart/increase" style="display:inline;">
+          <input type="hidden" name="itemId" value="<%= id %>">
+          <button type="submit" class="qty-btn">+</button>
+        </form>
+
+        <!-- Remove entire item -->
+        <form method="POST" action="/customer/<%= customerId %>/cart/remove" style="display:inline;">
+          <input type="hidden" name="itemId" value="<%= id %>">
+          <button type="submit" class="delete-btn">🗑️</button>
+        </form>
+      </div>
+    </li>
+  <% }) %>
+</ul>
+
+  <h3>Subtotal: ₹<%= subtotal %></h3>
+  <form method="POST" action="/customer/<%= customerId %>/cart/confirm">
+    <button>Proceed to Payment</button>
+  </form>
+<% } %>
+
+<button style="
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+" onclick="window.history.back()">⬅ Go Back</button>
+<button onclick="window.location.href='/login'" class="login-btn">🔐 Go to Login</button>
+
+</body>

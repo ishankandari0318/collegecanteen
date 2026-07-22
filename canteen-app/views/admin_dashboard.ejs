@@ -1,0 +1,35 @@
+<head>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <img style="align-content: center;" src="/logo_smartserve.jpg" alt="SmartServe Logo" class="logo">
+    <h1 style="align-content: centre;">Admin Dashboard </h1>
+  </header>
+
+  <main class="admin-dashboard">
+    <h2>Welcome, Admin 👋</h2>
+
+    <div class="admin-options">
+      <a href="/admin/items" class="admin-card">
+        <div class="card-icon">🛠</div>
+        <div class="card-text">
+          <h3>Edit Items</h3>
+        </div>
+      </a>
+
+      <a href="/admin/orders" class="admin-card">
+        <div class="card-icon">📦</div>
+        <div class="card-text">
+          <h3>View Orders</h3>
+        </div>
+      </a>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="back-btn" onclick="window.history.back()">⬅ Go Back</button>
+      <button class="login-btn" onclick="window.location.href='/login'">🔐 Go to Login</button>
+    </div>
+  </main>
+</body>

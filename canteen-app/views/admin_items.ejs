@@ -1,0 +1,126 @@
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eaf6ff;
+      text-align: center;
+    }
+
+    header {
+      background-color: #ff7f50;
+      padding: 15px 0;
+      color: white;
+    }
+
+    form {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    input, button {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    table {
+      width: 50%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .delete-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .back-btn {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <img src="/logo_smartserve.jpg" alt="SmartServe Logo" class="logo" style="height:60px;">
+    <h1>SmartServe</h1>
+  </header>
+
+  <h2>Items</h2>
+
+  <!-- Add Item Form -->
+  <form method="POST" action="/admin/items/add">
+    <input name="name" placeholder="Item Name" required>
+    <input name="price" placeholder="Price" required>
+    <input name="prep_time" placeholder="Prep Time (mins)" required>
+    <button type="submit">Add Item</button>
+  </form>
+
+  <!-- Table for Items -->
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Cost</th>
+        <th>Prep Time</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.forEach(item => { %>
+        <tr>
+          <td><%= item.name %></td>
+          <td>₹<%= item.price %></td>
+          <td><%= item.prep_time %> mins</td>
+          <td>
+            <form method="POST" action="/admin/items/delete/<%= item.id %>">
+              <button class="delete-btn" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <button class="back-btn" onclick="window.history.back()">⬅ Go Back</button>
+  <button onclick="window.location.href='/login'" class="login-btn">🔐 Go to Login</button>
+
+</body>

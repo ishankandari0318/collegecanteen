@@ -1,0 +1,109 @@
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eaf4ff;
+      margin: 0;
+      text-align: center;
+    }
+    header {
+      padding: 10px;
+    }
+    table {
+      width: 50%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 1 2px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f2f8ff;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .links {
+      margin: 15px;
+    }
+    .links a {
+      margin: 0 10px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <img src="/logo_smartserve.jpg" alt="SmartServe Logo" class="logo" style="height:300px;">
+    <h1>SmartServe</h1>
+  </header>
+
+  <h2>Menu</h2>
+
+  <div class="links">
+    <a href="/customer/<%= customerId %>/cart">🛒 Cart (<%= cartCount %>)</a>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Price (₹)</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.forEach(item => { %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.price %></td>
+          <td>
+            <form method="POST" action="/customer/<%= customerId %>/cart/add" style="display:inline;">
+              <input type="hidden" name="itemId" value="<%= item.id %>">
+              <input type="hidden" name="name" value="<%= item.name %>">
+              <input type="hidden" name="price" value="<%= item.price %>">
+              <button>Add to Cart</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <button style="
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  " onclick="window.history.back()">⬅ Go Back</button>
+
+  <button onclick="window.location.href='/login'" class="login-btn">🔐 Go to Login</button>
+</body>

@@ -1,0 +1,27 @@
+<head><link rel="stylesheet" href="/style.css">
+</head>
+
+
+<body>
+  <header class="site-header">
+  <img src="/logo_smartserve.jpg" alt="SmartServe Logo" class="logo">
+  <h1>SmartServe</h1>
+</header>
+<h2>Payment</h2>
+<p>Total: ₹<%= subtotal %></p>
+<p>UPI ID: <b>canteen@upi</b></p>
+<img src="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa=canteen@upi&am=<%= subtotal %>&currency=INR&size=200x200" alt="QR Code">
+<form method="POST" action="/customer/<%= customerId %>/place-order">
+  <button>Order Placed</button>
+</form>
+
+<button style="
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+" onclick="window.history.back()">⬅ Go Back</button>
+</body>
